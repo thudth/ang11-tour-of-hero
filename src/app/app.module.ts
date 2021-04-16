@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
+import {environment} from '../environments/environment';
 
 import {AppComponent} from './app.component';
 import {DashboardComponent} from './main/dashboard/dashboard.component';
@@ -12,7 +13,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './service/in-memory-data.service';
-import { HeroSearchComponent } from './main/hero-search/hero-search.component';
+import {HeroSearchComponent} from './main/hero-search/hero-search.component';
+import {GoogleLoginProvider, SocialAuthService, SocialAuthServiceConfig} from 'angularx-social-login';
+import {GoogleAuthComponent} from './google-auth/google-auth.component';
+
 
 @NgModule({
   imports: [
@@ -28,9 +32,25 @@ import { HeroSearchComponent } from './main/hero-search/hero-search.component';
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
+    GoogleAuthComponent
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    SocialAuthService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(environment.clientId)
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
 })
 export class AppModule {
 }
