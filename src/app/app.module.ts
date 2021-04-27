@@ -11,8 +11,6 @@ import {MessagesComponent} from './main/messages/messages.component';
 
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
-import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
-import {InMemoryDataService} from './service/in-memory-data.service';
 import {HeroSearchComponent} from './main/hero-search/hero-search.component';
 import {GoogleLoginProvider, SocialAuthService, SocialAuthServiceConfig} from 'angularx-social-login';
 import {GoogleAuthComponent} from './google-auth/google-auth.component';
@@ -23,7 +21,6 @@ import {GoogleAuthComponent} from './google-auth/google-auth.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false}),
     AppRoutingModule
   ],
   declarations: [
